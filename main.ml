@@ -23,21 +23,16 @@ let rec eval1 e =
   | _ -> failwith "unknown expression"
 
 let rec eval2 e =
+  let binop f e1 e2 =
+    match (eval2 e1, eval2 e2) with
+    | (IntVal(n1), IntVal(n2)) -> IntVal(f n1 n2)
+    | _ -> failwith "integer values exprected"
+  in
   match e with
   | IntLit(n) -> IntVal(n)
   | BoolLit(b) -> BoolVal(b)
-  | Plus(e1, e2) ->
-    begin
-      match (eval2 e1, eval2 e2) with
-      | (IntVal(n1), IntVal(n2)) -> IntVal(n1 + n2)
-      | _ -> failwith "integer values expected"
-    end
-  | Times(e1, e2) ->
-    begin
-      match (eval2 e1, eval2 e2) with
-      | (IntVal(n1), IntVal(n2)) -> IntVal(n1 * n2)
-      | _ -> failwith "integer values expected"
-    end
+  | Plus(e1, e2) -> binop (+) e1 e2
+  | Times(e1, e2) -> binop ( * ) e1 e2
   | If(e1, e2, e3) ->
     begin
       match (eval2 e1) with
