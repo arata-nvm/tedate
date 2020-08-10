@@ -32,7 +32,9 @@ let rec eval2 e =
   | IntLit(n) -> IntVal(n)
   | BoolLit(b) -> BoolVal(b)
   | Plus(e1, e2) -> binop (+) e1 e2
+  | Minus(e1, e2) -> binop (-) e1 e2
   | Times(e1, e2) -> binop ( * ) e1 e2
+  | Divide(e1, e2) -> binop (/) e1 e2
   | If(e1, e2, e3) ->
     begin
       match (eval2 e1) with
