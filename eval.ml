@@ -54,4 +54,13 @@ let rec eval e env =
   | Let(x, e1, e2) ->
     let env1 = ext env x (eval e1 env)
     in eval e2 env1
+  | Fun(x, e1) -> FunVal(x, e1, env)
+  | App(e1, e2) ->
+    begin
+      match (eval e1 env) with
+      | FunVal(x, body, env1) ->
+        let arg = (eval e2 env)
+        in eval body (ext env1 x arg)
+      | _ -> failwith "function value expected"
+    end
   | _ -> failwith "unknown expression e"
