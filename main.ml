@@ -7,6 +7,7 @@ type exp =
   | Divide of exp * exp
   | If of exp * exp * exp
   | Eq of exp * exp
+  | Greater of exp * exp
 
 type value =
   | IntVal of int
@@ -49,6 +50,12 @@ let rec eval2 e =
       match (eval2 e1, eval2 e2) with
       | (IntVal(n1), IntVal(n2)) -> BoolVal(n1 = n2)
       | (BoolVal(b1), BoolVal(b2)) -> BoolVal(b1 = b2)
+      | _ -> failwith "wrong value"
+    end
+  | Greater(e1, e2) ->
+    begin
+      match (eval2 e1, eval2 e2) with
+      | (IntVal(n1), IntVal(n2)) -> BoolVal(n1 > n2)
       | _ -> failwith "wrong value"
     end
   | _ -> failwith "unknown expression e"
