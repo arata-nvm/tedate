@@ -38,6 +38,13 @@ let rec eval e env =
       | (BoolVal(b1), BoolVal(b2)) -> BoolVal(b1 = b2)
       | _ -> failwith "wrong value"
     end
+  | Neq(e1, e2) ->
+    begin
+      match (eval e1 env, eval e2 env) with
+      | (IntVal(n1), IntVal(n2)) -> BoolVal(n1 <> n2)
+      | (BoolVal(b1), BoolVal(b2)) -> BoolVal(b1 <> b2)
+      | _ -> failwith "wrong value"
+    end
   | Greater(e1, e2) ->
     begin
       match (eval e1 env, eval e2 env) with

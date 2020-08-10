@@ -10,6 +10,7 @@ open Syntax
 %token ASTERISK
 %token SLASH
 %token EQUAL
+%token NOTEQUAL
 %token LESS
 %token GREATER
 %token COLCOL
@@ -42,7 +43,7 @@ open Syntax
 %nonassoc IN ELSE ARROW WITH
 %left VBAR
 %left SEMICOL
-%left EQUAL GREATER LESS
+%left EQUAL NOTEQUAL GREATER LESS
 %right COLCOL
 %left PLUS MINUS
 %left ASTERISK SLASH
@@ -109,6 +110,9 @@ exp:
 
   | exp EQUAL exp
     { Eq ($1, $3) }
+
+  | exp NOTEQUAL exp
+    { Neq ($1, $3) }
 
   | exp LESS exp
     { Less ($1, $3) }

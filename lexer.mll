@@ -17,6 +17,7 @@ rule token = parse
   | '*' { ASTERISK }
   | '/' { SLASH }
   | '=' { EQUAL }
+  | "<>" { NOTEQUAL }
   | '<' { LESS }
   | '>' { GREATER }
   | ';' { SEMICOL }
