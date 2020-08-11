@@ -21,4 +21,10 @@ let rec tcheck e =
       | (TBool, TBool, TBool) -> TBool
       | _ -> failwith "type error in IF"
     end
+  | Eq(e1, e2) ->
+    begin
+      match (tcheck e1, tcheck e2) with
+      | (TInt, TInt) | (TBool, TBool) -> TBool
+      | _ -> failwith "type error in Eq"
+    end
   | _ -> failwith "unknown expression"
