@@ -84,4 +84,10 @@ let rec eval e env =
       | ListVal(hd :: tl) -> hd
       | _ -> failwith "list value expected"
     end
+  | Tail(e) ->
+    begin
+      match (eval e env) with
+      | ListVal(hd :: tl) -> ListVal(tl)
+      | _ -> failwith "list value expected"
+    end
   | _ -> failwith "unknown expression e"
