@@ -72,4 +72,10 @@ let rec eval e env =
         | _ -> failwith "function value expected"
       end
   | Empty -> ListVal([])
+  | Cons(e1, e2) ->
+    begin
+      match (eval e1 env, eval e2 env) with
+      | (v1, ListVal(v2)) -> ListVal(v1 :: v2)
+      | _ -> failwith "list value expected"
+    end
   | _ -> failwith "unknown expression e"
