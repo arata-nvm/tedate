@@ -78,4 +78,10 @@ let rec eval e env =
       | (v1, ListVal(v2)) -> ListVal(v1 :: v2)
       | _ -> failwith "list value expected"
     end
+  | Head(e) ->
+    begin
+      match (eval e env) with
+      | ListVal(hd :: tl) -> hd
+      | _ -> failwith "list value expected"
+    end
   | _ -> failwith "unknown expression e"
