@@ -71,4 +71,5 @@ let rec eval e env =
           eval body env2
         | _ -> failwith "function value expected"
       end
+  | Empty -> ListVal([])
   | _ -> failwith "unknown expression e"
