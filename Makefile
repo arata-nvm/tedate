@@ -1,5 +1,5 @@
-SRC=syntax.ml parser.mly lexer.mll eval.ml type.ml main.ml
-COMPONENT=syntax.ml parser.mli parser.ml lexer.ml eval.ml type.ml main.ml
+SRC=common.ml syntax.ml parser.mly lexer.mll eval.ml type.ml main.ml
+COMPONENT=common.ml syntax.ml parser.mli parser.ml lexer.ml eval.ml type.ml main.ml
 TARGET=miniocaml
 
 all: $(TARGET)
